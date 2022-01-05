@@ -752,4 +752,8 @@ impl BlockDevice for SDCardWrapper {
     fn write_block(&self, block_id: usize, buf: &[u8]) {
         self.0.exclusive_access().write_sector(buf,block_id as u32).unwrap();
     }
+
+    fn handler_interrupt(&self) {
+        todo!()
+    }
 }

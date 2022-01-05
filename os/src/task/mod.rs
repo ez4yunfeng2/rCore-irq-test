@@ -1,38 +1,70 @@
 mod context;
+mod id;
+mod manager;
+mod process;
+mod processor;
 mod switch;
 mod task;
-mod manager;
-mod processor;
-mod id;
-mod process;
 
-use crate::fs::{open_file, OpenFlags};
-use switch::__switch;
+use crate::{
+    fs::{open_file, OpenFlags},
+    sync::UPSafeCell, drivers::{IRQ_TASKS, UART_DEVICE},
+};
 use alloc::sync::Arc;
-use manager::fetch_task;
 use lazy_static::*;
-use process::ProcessControlBlock;
+use manager::fetch_task;
+pub use process::ProcessControlBlock;
+use switch::__switch;
 
 pub use context::TaskContext;
+pub use id::{kstack_alloc, pid_alloc, KernelStack, PidHandle};
+pub use manager::add_task;
 pub use processor::{
-    run_tasks,
-    current_task,
-    current_process,
-    current_user_token,
-    current_trap_cx_user_va,
-    current_trap_cx,
-    current_kstack_top,
-    take_current_task,
-    schedule,
+    current_kstack_top, current_process, current_task, current_trap_cx, current_trap_cx_user_va,
+    current_user_token, run_tasks, schedule, take_current_task,
 };
 pub use task::{TaskControlBlock, TaskStatus};
-pub use manager::add_task;
-pub use id::{
-    PidHandle,
-    pid_alloc,
-    KernelStack,
-    kstack_alloc,
-};
+
+use self::manager::add_task_front;
+
+pub fn awake_by_irq_and_run(irq: usize) {
+    let task = take_current_task().unwrap();
+    let mut task_inner = task.inner_exclusive_access();
+    task_inner.task_status = TaskStatus::WaitIRQ;
+    let task_cx_ptr = &mut task_inner.task_cx as *mut TaskContext;
+    drop(task_inner);
+    add_task(task);
+    if let Some(task) = IRQ_TASKS.fetch_irq_task(irq){
+        add_task_front(task);
+    } else {
+        if irq == 10 {
+            UART_DEVICE.append();
+        }
+    }
+    schedule(task_cx_ptr);
+}
+
+lazy_static!(
+    pub static ref IRQ_FLAG:UPSafeCell<bool> = unsafe{UPSafeCell::new(false)};
+);
+
+pub fn wait_irq_and_run_next(irq: usize) {
+    if let Some(task) = take_current_task() {
+        let mut task_inner = task.inner_exclusive_access();
+        task_inner.task_status = TaskStatus::WaitIRQ;
+        let task_cx_ptr = &mut task_inner.task_cx as *mut TaskContext;
+        drop(task_inner);
+        IRQ_TASKS.add_irq_task(irq, task);
+        schedule(task_cx_ptr);
+    } else {
+        loop{
+            if *IRQ_FLAG.exclusive_access() == true{
+                *IRQ_FLAG.exclusive_access() = false;
+                break
+            }
+        }
+    }
+}
 
 pub fn suspend_current_and_run_next() {
     // There must be an application running.
@@ -86,7 +118,7 @@ pub fn exit_current_and_run_next(exit_code: i32) {
             // move all child processes under init process
             let mut initproc_inner = INITPROC.inner_exclusive_access();
             for child in process_inner.children.iter() {
-                child.inner_exclusive_access().parent = Some(Arc::downgrade(&INITPROC)); 
+                child.inner_exclusive_access().parent = Some(Arc::downgrade(&INITPROC));
                 initproc_inner.children.push(child.clone());
             }
         }

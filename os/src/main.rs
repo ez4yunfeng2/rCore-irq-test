@@ -1,5 +1,6 @@
 #![no_std]
 #![no_main]
+#![feature(naked_functions)]
 #![feature(global_asm)]
 #![feature(asm)]
 #![feature(panic_info_message)]
@@ -43,8 +44,10 @@ fn clear_bss() {
 pub fn rust_main() -> ! {
     clear_bss();
     println!("[kernel] Hello, world!");
+    unsafe{riscv::register::sstatus::set_sie();}
     mm::init();
     mm::remap_test();
+    drivers::plic_init();
     trap::init();
     trap::enable_timer_interrupt();
     timer::set_next_trigger();

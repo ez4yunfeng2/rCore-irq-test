@@ -18,7 +18,9 @@ pub const CLOCK_FREQ: usize = 12500000;
 
 #[cfg(feature = "board_qemu")]
 pub const MMIO: &[(usize, usize)] = &[
-    (0x10001000, 0x1000),
+    (0x2000000, 0x10000),
+    (0xc000000, 0x210000),
+    (0x10000000, 0x9000)
 ];
 
 #[cfg(feature = "board_k210")]

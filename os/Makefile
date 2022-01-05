@@ -10,7 +10,7 @@ APPS := ../user/src/bin/*
 
 # BOARD
 BOARD ?= qemu
-SBI ?= rustsbi
+SBI ?= rustsbi2
 BOOTLOADER := ../bootloader/$(SBI)-$(BOARD).bin
 K210_BOOTLOADER_SIZE := 131072
 
@@ -83,13 +83,14 @@ run: run-inner
 
 run-inner: build
 ifeq ($(BOARD),qemu)
-	@qemu-system-riscv64 \
+	@cp ~/rustsbi-qemu/target/riscv64imac-unknown-none-elf/release/rustsbi-qemu.bin ~/rCore-Tutorial-v3/bootloader/rustsbi2-qemu.bin
+	@/opt/qemu/bin/qemu-system-riscv64 \
 		-machine virt \
 		-nographic \
 		-bios $(BOOTLOADER) \
 		-device loader,file=$(KERNEL_BIN),addr=$(KERNEL_ENTRY_PA) \
 		-drive file=$(FS_IMG),if=none,format=raw,id=x0 \
-        -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+        -device virtio-blk-device,drive=x0
 else
 	(which $(K210-BURNER)) || (cd .. && git clone https://github.com/sipeed/kflash.py.git && mv kflash.py tools)
 	@cp $(BOOTLOADER) $(BOOTLOADER).copy

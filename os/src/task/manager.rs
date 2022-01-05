@@ -16,6 +16,9 @@ impl TaskManager {
     pub fn add(&mut self, task: Arc<TaskControlBlock>) {
         self.ready_queue.push_back(task);
     }
+    pub fn add_front(&mut self, task: Arc<TaskControlBlock>) {
+        self.ready_queue.push_front(task);
+    }
     pub fn fetch(&mut self) -> Option<Arc<TaskControlBlock>> {
         self.ready_queue.pop_front()
     }
@@ -29,6 +32,10 @@ lazy_static! {
 
 pub fn add_task(task: Arc<TaskControlBlock>) {
     TASK_MANAGER.exclusive_access().add(task);
+}
+
+pub fn add_task_front(task: Arc<TaskControlBlock>) {
+    TASK_MANAGER.exclusive_access().add_front(task);
 }
 
 pub fn fetch_task() -> Option<Arc<TaskControlBlock>> {

@@ -67,3 +67,52 @@ __restore:
     # back to user stack
     ld sp, 2*8(sp)
     sret
+
+    .section .text
+    .globl __from_kernel_save
+    .align 2
+__from_kernel_save:
+        add sp, sp, -19 * 8
+        sd  a0, 0*8(sp)
+        sd  a1, 1*8(sp)
+        sd  a2, 2*8(sp)
+        sd  a3, 3*8(sp)
+        sd  a4, 4*8(sp)
+        sd  a5, 5*8(sp)
+        sd  a6, 6*8(sp)
+        sd  a7, 7*8(sp)
+        sd  t0, 8*8(sp)
+        sd  t1, 9*8(sp)
+        sd  t2, 10*8(sp)
+        sd  t3, 11*8(sp)
+        sd  t4, 12*8(sp)
+        sd  t5, 13*8(sp)
+        sd  t6, 14*8(sp)
+        sd  ra, 15*8(sp)
+        csrr t0, sepc
+        csrr t1, scause
+        csrr t2, sstatus
+        sd  t0, 16*8(sp)
+        sd  t1, 17*8(sp)
+        sd  t2, 18*8(sp)
+        mv  a0, sp
+        call   trap_from_kernel
+__to_kernel_restore:
+        ld  a0, 0*8(sp)
+        ld  a1, 1*8(sp)
+        ld  a2, 2*8(sp)
+        ld  a3, 3*8(sp)
+        ld  a4, 4*8(sp)
+        ld  a5, 5*8(sp)
+        ld  a6, 6*8(sp)
+        ld  a7, 7*8(sp)
+        ld  t0, 8*8(sp)
+        ld  t1, 9*8(sp)
+        ld  t2, 10*8(sp)
+        ld  t3, 11*8(sp)
+        ld  t4, 12*8(sp)
+        ld  t5, 13*8(sp)
+        ld  t6, 14*8(sp)
+        ld  ra, 15*8(sp)
+        addi sp, sp, 19 * 8
+        sret

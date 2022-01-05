@@ -12,7 +12,7 @@ use riscv::register::{
     stval,
     sie,
 };
-use crate::syscall::syscall;
+use crate::{syscall::syscall, task::IRQ_FLAG, sbi::s_set_mext, drivers::{BLOCK_DEVICE, UART_DEVICE, next, complete}};
 use crate::task::{
     exit_current_and_run_next,
     suspend_current_and_run_next,
@@ -30,8 +30,11 @@ pub fn init() {
 }
 
 fn set_kernel_trap_entry() {
+    extern "C" {
+        fn __from_kernel_save();
+    }
     unsafe {
-        stvec::write(trap_from_kernel as usize, TrapMode::Direct);
+        stvec::write(__from_kernel_save as usize, TrapMode::Direct);
     }
 }
 
@@ -86,11 +89,25 @@ pub fn trap_handler() -> ! {
             check_timer();
             suspend_current_and_run_next();
         }
+        Trap::Interrupt(Interrupt::SupervisorSoft) => {
+            if let Some(irq) = next(){
+                match irq {
+                    10 => {
+                        UART_DEVICE.handler_interrupt();
+                    }
+                    8 => {
+                        BLOCK_DEVICE.handler_interrupt()
+                    }
+                    _ => {
+                        panic!("unknow irq");
+                    }
+                }
+            }
+        }
         _ => {
             panic!("Unsupported trap {:?}, stval = {:#x}!", scause.cause(), stval);
         }
     }
-    //println!("before trap_return");
     trap_return();
 }
 
@@ -116,11 +133,33 @@ pub fn trap_return() -> ! {
     }
 }
 
+
 #[no_mangle]
-pub fn trap_from_kernel() -> ! {
-    use riscv::register::sepc;
-    println!("stval = {:#x}, sepc = {:#x}", stval::read(), sepc::read());
-    panic!("a trap {:?} from kernel!", scause::read().cause());
+pub fn trap_from_kernel(){
+    let scause = scause::read();
+    match scause.cause() {
+        Trap::Interrupt(Interrupt::SupervisorTimer) => {
+            set_next_trigger();
+        }
+        Trap::Interrupt(Interrupt::SupervisorSoft) => {
+            if let Some(irq) = next() {
+                match irq {
+                    10 => {UART_DEVICE.append();}
+                    8 => {
+                        complete(irq);
+                        s_set_mext();
+                        *IRQ_FLAG.exclusive_access() = true;
+                    }
+                    _ => {
+                        panic!("Unsupported irq")
+                    }
+                }
+            }
+        }
+        _ => {
+            panic!("error trap from kernel")
+        }
+    }
 }
 
 pub use context::TrapContext;

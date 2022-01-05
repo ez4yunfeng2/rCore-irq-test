@@ -75,4 +75,5 @@ pub enum TaskStatus {
     Ready,
     Running,
     Blocking,
+    WaitIRQ
 }

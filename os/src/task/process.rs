@@ -20,7 +20,7 @@ pub struct ProcessControlBlock {
     // immutable
     pub pid: PidHandle,
     // mutable
-    inner: UPSafeCell<ProcessControlBlockInner>,
+    pub inner: UPSafeCell<ProcessControlBlockInner>,
 }
 
 pub struct ProcessControlBlockInner {
