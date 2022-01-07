@@ -83,7 +83,6 @@ run: run-inner
 
 run-inner: build
 ifeq ($(BOARD),qemu)
-	@cp ~/rustsbi-qemu/target/riscv64imac-unknown-none-elf/release/rustsbi-qemu.bin ~/rCore-Tutorial-v3/bootloader/rustsbi2-qemu.bin
 	@/opt/qemu/bin/qemu-system-riscv64 \
 		-machine virt \
 		-nographic \
