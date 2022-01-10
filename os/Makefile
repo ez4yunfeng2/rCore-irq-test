@@ -10,7 +10,7 @@ APPS := ../user/src/bin/*
 
 # BOARD
 BOARD ?= qemu
-SBI ?= rustsbi2
+SBI ?= rustsbi
 BOOTLOADER := ../bootloader/$(SBI)-$(BOARD).bin
 K210_BOOTLOADER_SIZE := 131072
 

@@ -9,7 +9,7 @@ use alloc::collections::VecDeque;
 use crate::{
     drivers::{IRQ_TASKS, complete},
     sync::UPSafeCell,
-    task::{awake_by_irq_and_run, wait_irq_and_run_next}, sbi::s_set_mext,
+    task::{awake_by_irq_and_run, wait_irq_and_run_next}
 };
 
 pub trait UartDevice: Send + Sync + Any {
@@ -97,7 +97,6 @@ impl Ns1665a {
             if ptr.add(5).read_volatile() & 1 != 0 {
                 self.buffer.push_back(ptr.add(0).read_volatile());
                 complete(10);
-                s_set_mext();
             }
         }
     }

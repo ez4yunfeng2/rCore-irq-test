@@ -1,11 +1,6 @@
-
-
 use super::File;
 use crate::drivers::{UART_DEVICE, complete};
 use crate::mm::{UserBuffer};
-use crate::sbi::s_set_mext;
-
-
 
 pub struct Stdin;
 
@@ -16,11 +11,9 @@ impl File for Stdin {
     fn writable(&self) -> bool { false }
     fn read(&self, mut user_buf: UserBuffer) -> usize {
         assert_eq!(user_buf.len(), 1);
-        
         let ch = UART_DEVICE.get().unwrap();
         unsafe { user_buf.buffers[0].as_mut_ptr().write_volatile(ch); }
         complete(10);
-        s_set_mext();
         1
     }
     fn write(&self, _user_buf: UserBuffer) -> usize {

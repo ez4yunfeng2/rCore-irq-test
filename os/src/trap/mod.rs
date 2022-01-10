@@ -12,7 +12,7 @@ use riscv::register::{
     stval,
     sie,
 };
-use crate::{syscall::syscall, task::IRQ_FLAG, sbi::s_set_mext, drivers::{BLOCK_DEVICE, UART_DEVICE, next, complete}};
+use crate::{syscall::syscall, task::IRQ_FLAG, drivers::{BLOCK_DEVICE, UART_DEVICE, next, complete}};
 use crate::task::{
     exit_current_and_run_next,
     suspend_current_and_run_next,
@@ -89,7 +89,7 @@ pub fn trap_handler() -> ! {
             check_timer();
             suspend_current_and_run_next();
         }
-        Trap::Interrupt(Interrupt::SupervisorSoft) => {
+        Trap::Interrupt(Interrupt::SupervisorExternal) => {
             if let Some(irq) = next(){
                 match irq {
                     10 => {
@@ -141,13 +141,12 @@ pub fn trap_from_kernel(){
         Trap::Interrupt(Interrupt::SupervisorTimer) => {
             set_next_trigger();
         }
-        Trap::Interrupt(Interrupt::SupervisorSoft) => {
+        Trap::Interrupt(Interrupt::SupervisorExternal) => {
             if let Some(irq) = next() {
                 match irq {
                     10 => {UART_DEVICE.append();}
                     8 => {
                         complete(irq);
-                        s_set_mext();
                         *IRQ_FLAG.exclusive_access() = true;
                     }
                     _ => {
@@ -157,7 +156,7 @@ pub fn trap_from_kernel(){
             }
         }
         _ => {
-            panic!("error trap from kernel")
+            panic!("error trap from kernel {:?}",scause.cause())
         }
     }
 }

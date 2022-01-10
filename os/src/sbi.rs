@@ -25,10 +25,6 @@ fn sbi_call(which: usize, arg0: usize, arg1: usize, arg2: usize) -> usize {
     ret
 }
 
-pub fn s_set_mext() {
-    sbi_call(0x6666, 0, 0, 0);
-}
-
 pub fn set_timer(timer: usize) {
     sbi_call(SBI_SET_TIMER, timer, 0, 0);
 }

@@ -1,6 +1,6 @@
 use super::BlockDevice;
 use crate::drivers::{complete, IRQ_TASKS};
-use crate::sbi::s_set_mext;
+
 use crate::sync::UPSafeCell;
 use crate::task::awake_by_irq_and_run;
 use crate::{
@@ -39,7 +39,6 @@ impl BlockDevice for VirtIOBlock {
 
     fn handler_interrupt(&self) {
         complete(8);
-        s_set_mext();
         awake_by_irq_and_run(8);
     }
 }

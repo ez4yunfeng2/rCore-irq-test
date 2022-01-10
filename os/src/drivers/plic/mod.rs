@@ -1,11 +1,12 @@
 use alloc::{collections::{BTreeMap, VecDeque}, sync::Arc};
+use riscv::register::sie;
 use crate::{task::TaskControlBlock, sync::UPSafeCell};
 use lazy_static::lazy_static;
 
 const PLIC_PRIORITY: usize = 0x0c00_0000;
-const PLIC_INT_ENABLE: usize = 0x0c00_2000;
-const PLIC_THRESHOLD: usize = 0x0c20_0000;
-const PLIC_CLAIM: usize = 0x0c20_0004;
+const PLIC_INT_ENABLE: usize = 0x0c00_2080;
+const PLIC_THRESHOLD: usize = 0x0c20_1000;
+const PLIC_CLAIM: usize = 0x0c20_1004;
 
 lazy_static! {
     pub static ref IRQ_TASKS:Arc<IrqWait> = Arc::new(IrqWait::new());
@@ -76,10 +77,10 @@ fn set_priority(id: u32, prio: u8) {
 }
 
 pub fn plic_init(){
+    unsafe{ sie::set_sext() }
     set_threshold(0);
     for i in [8,10]{
         enable(i);
         set_priority(i, 1 as u8);
     }
-    
 }
