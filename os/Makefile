@@ -83,7 +83,7 @@ run: run-inner
 
 run-inner: build
 ifeq ($(BOARD),qemu)
-	@/opt/qemu/bin/qemu-system-riscv64 \
+	@qemu-system-riscv64 \
 		-machine virt \
 		-nographic \
 		-bios $(BOOTLOADER) \
