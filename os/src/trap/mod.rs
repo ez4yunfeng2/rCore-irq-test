@@ -1,27 +1,23 @@
 mod context;
 
+pub use context::TrapContext;
+use crate::config::TRAMPOLINE;
+use crate::drivers::{KEYBOARD_DEVICE, MOUSE_DEVICE};
+use crate::task::{
+    current_trap_cx, current_trap_cx_user_va, current_user_token, exit_current_and_run_next,
+    suspend_current_and_run_next,
+};
+use crate::timer::{check_timer, set_next_trigger};
+use crate::{
+    drivers::{complete, next, BLOCK_DEVICE, UART_DEVICE},
+    syscall::syscall,
+    task::IRQ_FLAG,
+};
 use riscv::register::{
     mtvec::TrapMode,
-    stvec,
-    scause::{
-        self,
-        Trap,
-        Exception,
-        Interrupt,
-    },
-    stval,
-    sie,
+    scause::{self, Exception, Interrupt, Trap},
+    sie, stval, stvec,
 };
-use crate::{syscall::syscall, task::IRQ_FLAG, drivers::{BLOCK_DEVICE, UART_DEVICE, next, complete}};
-use crate::task::{
-    exit_current_and_run_next,
-    suspend_current_and_run_next,
-    current_user_token,
-    current_trap_cx,
-    current_trap_cx_user_va,
-};
-use crate::timer::{set_next_trigger, check_timer};
-use crate::config::TRAMPOLINE;
 
 global_asm!(include_str!("trap.S"));
 
@@ -45,7 +41,9 @@ fn set_user_trap_entry() {
 }
 
 pub fn enable_timer_interrupt() {
-    unsafe { sie::set_stimer(); }
+    unsafe {
+        sie::set_stimer();
+    }
 }
 
 #[no_mangle]
@@ -64,12 +62,12 @@ pub fn trap_handler() -> ! {
             cx = current_trap_cx();
             cx.x[10] = result as usize;
         }
-        Trap::Exception(Exception::StoreFault) |
-        Trap::Exception(Exception::StorePageFault) |
-        Trap::Exception(Exception::InstructionFault) |
-        Trap::Exception(Exception::InstructionPageFault) |
-        Trap::Exception(Exception::LoadFault) |
-        Trap::Exception(Exception::LoadPageFault) => {
+        Trap::Exception(Exception::StoreFault)
+        | Trap::Exception(Exception::StorePageFault)
+        | Trap::Exception(Exception::InstructionFault)
+        | Trap::Exception(Exception::InstructionPageFault)
+        | Trap::Exception(Exception::LoadFault)
+        | Trap::Exception(Exception::LoadPageFault) => {
             println!(
                 "[kernel] {:?} in application, bad addr = {:#x}, bad instruction = {:#x}, core dumped.",
                 scause.cause(),
@@ -90,13 +88,20 @@ pub fn trap_handler() -> ! {
             suspend_current_and_run_next();
         }
         Trap::Interrupt(Interrupt::SupervisorExternal) => {
-            if let Some(irq) = next(){
+            if let Some(irq) = next() {
+                println!("irq {}",irq);
                 match irq {
                     10 => {
                         UART_DEVICE.handler_interrupt();
                     }
-                    8 => {
-                        BLOCK_DEVICE.handler_interrupt()
+                    8 => BLOCK_DEVICE.handler_interrupt(),
+                    6 => {
+                        complete(irq);
+                        MOUSE_DEVICE.handler_interrupt();
+                    }
+                    5 => {
+                        complete(irq);
+                        KEYBOARD_DEVICE.handler_interrupt();                            
                     }
                     _ => {
                         panic!("unknow irq");
@@ -105,7 +110,11 @@ pub fn trap_handler() -> ! {
             }
         }
         _ => {
-            panic!("Unsupported trap {:?}, stval = {:#x}!", scause.cause(), stval);
+            panic!(
+                "Unsupported trap {:?}, stval = {:#x}!",
+                scause.cause(),
+                stval
+            );
         }
     }
     trap_return();
@@ -133,9 +142,8 @@ pub fn trap_return() -> ! {
     }
 }
 
-
 #[no_mangle]
-pub fn trap_from_kernel(){
+pub fn trap_from_kernel() {
     let scause = scause::read();
     match scause.cause() {
         Trap::Interrupt(Interrupt::SupervisorTimer) => {
@@ -144,10 +152,20 @@ pub fn trap_from_kernel(){
         Trap::Interrupt(Interrupt::SupervisorExternal) => {
             if let Some(irq) = next() {
                 match irq {
-                    10 => {UART_DEVICE.append();}
+                    10 => {
+                        UART_DEVICE.append();
+                    }
                     8 => {
                         complete(irq);
                         *IRQ_FLAG.exclusive_access() = true;
+                    }
+                    6 => {
+                        complete(irq);
+                        MOUSE_DEVICE.handler_interrupt();
+                    }
+                    5 => {
+                        complete(irq);
+                        KEYBOARD_DEVICE.handler_interrupt();                            
                     }
                     _ => {
                         panic!("Unsupported irq")
@@ -156,9 +174,8 @@ pub fn trap_from_kernel(){
             }
         }
         _ => {
-            panic!("error trap from kernel {:?}",scause.cause())
+            panic!("error trap from kernel {:?}", scause.cause())
         }
     }
 }
 
-pub use context::TrapContext;

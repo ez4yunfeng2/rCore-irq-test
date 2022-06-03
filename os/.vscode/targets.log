@@ -1,0 +1,599 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make.exe: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.2
+# Built for x86_64-w64-mingw32
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Thu May 26 13:00:32 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# environment
+GTK_BASEPATH = C:\Program Files (x86)\GtkSharp\2.12\
+# makefile
+MAKEFLAGS = pqrR
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from 'Makefile', line 2)
+TARGET := riscv64gc-unknown-none-elf
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# makefile (from 'Makefile', line 19)
+KERNEL_ENTRY_PA := 0x80200000
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+HOMEDRIVE = C:
+# automatic
+@F = $(notdir $@)
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# makefile
+CURDIR := c:/Users/14861/Desktop/rCore-irq-test/os
+# default
+SHELL := C:/cygwin64/bin/sh.exe
+# environment
+WINDIR = C:\Windows
+# environment
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"42e84e0914b17800d483f69e299e1b00.zh-cn","_translationsConfigFile":"C:\\Users\\14861\\AppData\\Roaming\\Code\\clp\\42e84e0914b17800d483f69e299e1b00.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\14861\\AppData\\Roaming\\Code\\clp\\42e84e0914b17800d483f69e299e1b00.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\14861\\AppData\\Roaming\\Code\\clp\\42e84e0914b17800d483f69e299e1b00.zh-cn\\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"C:\\Users\\14861\\AppData\\Roaming\\Code\\clp\\42e84e0914b17800d483f69e299e1b00.zh-cn\\corrupted.info","_languagePackSupport":true}
+# environment
+ONEDRIVE = C:\Users\14861\OneDrive
+# environment
+QSYS_ROOTDIR = D:\intelFPGA_lite\18.1\quartus\sopc_builder\bin
+# environment
+MAVEN_HOME = D:\Program Files\apache-maven-3.8.5
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.wlua;.lexe
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+TMP = C:\Users\14861\AppData\Local\Temp
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PROGRAMDATA = C:\ProgramData
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-e491bc14-c361-474c-8cb4-33f0c5a4c7e3-sock
+# environment
+VSCODE_CWD = C:\Windows\System32
+# default
+MAKE_HOST := x86_64-w64-mingw32
+# environment
+PATH = C:\Program Files\Eclipse Foundation\jdk-8.0.302.8-hotspot\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files\Python37\Scripts\;C:\Program Files\Python37\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Go\bin;C:\Program Files\Java\jdk1.8.0_202\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\Program Files (x86)\NetSarang\Xftp 7\;C:\Program Files\qemu;C:\Users\14861\AppData\Roaming\Python\Python37\Scripts;C:\Program Files\nodejs\;C:\Program Files\usbipd-win\;C:\Program Files\CMake\bin;D:\Program Files\kendryte-toolchain\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\Lua\5.1;C:\Program Files (x86)\Lua\5.1\clibs;C:\Users\14861\AppData\Local\Android\Sdk\platform-tools;D:\Program Files\apache-maven-3.8.5\bin;D:\Program Files\apache-tomcat-8.5.73\bin;C:\Program Files (x86)\GtkSharp\2.12\bin;D:\Program Files\flutter\bin;C:\cygwin64\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\14861\AppData\Local\.wasm-pack\.wasm-bindgen-cargo-install-0.2.80\bin;C:\Program Files\010 Editor;C:\Program Files\dotnet\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\14861\scoop\shims;C:\Users\14861\.cargo\bin;C:\Users\14861\AppData\Local\Microsoft\WindowsApps;C:\Users\14861\.dotnet\tools;C:\Users\14861\go\bin;C:\Users\14861\AppData\Roaming\npm;C:\Users\14861\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\14861\.dotnet\tools
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+ZES_ENABLE_SYSMAN = 1
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+USERPROFILE = C:\Users\14861
+# makefile (from 'Makefile', line 33)
+DISASM = -x
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+GOPATH = C:\Users\14861\go
+# environment
+SOPC_KIT_NIOS2 = D:\intelFPGA_lite\18.1\nios2eds
+# environment
+VSCODE_LOG_STACK = false
+# environment
+NUMBER_OF_PROCESSORS = 8
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync
+# automatic
+%F = $(notdir $%)
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22824_EDIQAUVMGGHLNPHT
+# makefile (from 'Makefile', line 13)
+SBI = rustsbi
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+COMPUTERNAME = DESKTOP-24TD2NV
+# makefile (from 'Makefile', line 3)
+MODE := release
+# environment
+PROGRAMFILES = C:\Program Files
+# default
+.LOADED := 
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERNAME = 14861
+# environment
+PUBLIC = C:\Users\Public
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\14861\AppData\Roaming\Code\CachedData\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# makefile (from 'Makefile', line 5)
+KERNEL_BIN := target/riscv64gc-unknown-none-elf/release/os.bin
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# environment
+LOGONSERVER = \\DESKTOP-24TD2NV
+# environment
+ONEDRIVECONSUMER = C:\Users\14861\OneDrive
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+USERDOMAIN = DESKTOP-24TD2NV
+# makefile (from 'Makefile', line 25)
+K210-SERIALPORT = /dev/ttyUSB0
+# environment
+LUA_DEV = C:\Program Files (x86)\Lua\5.1
+# environment
+MAKELEVEL := 0
+# makefile (from 'Makefile', line 8)
+SDCARD := /dev/sdb
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+JAVA_HOME = C:\Program Files\Java\jdk1.8.0_202
+# default
+MAKE_VERSION := 4.2
+# makefile
+.DEFAULT_GOAL := build
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# environment
+LOCALAPPDATA = C:\Users\14861\AppData\Local
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# environment
+CATALINA_HOME = D:\Program Files\apache-tomcat-8.5.73
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+# environment
+OS = Windows_NT
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\2e0f71a9d784a5341de376df78e86dc8-1.67.2-main-sock
+# environment
+HOMEPATH = \Users\14861
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+PROMPT = $P$G
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# makefile (from 'Makefile', line 15)
+K210_BOOTLOADER_SIZE := 131072
+# environment
+SYSTEMROOT = C:\Windows
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# makefile (from 'Makefile', line 7)
+FS_IMG := ../user/target/riscv64gc-unknown-none-elf/release/fs.img
+# makefile (from 'Makefile', line 29)
+OBJDUMP := rust-objdump --arch-name=riscv64
+# automatic
++F = $(notdir $+)
+# makefile (from 'Makefile', line 12)
+BOARD = qemu
+# environment
+APPDATA = C:\Users\14861\AppData\Roaming
+# environment
+TEMP = C:\Users\14861\AppData\Local\Temp
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# makefile (from 'Makefile', line 26)
+K210-BURNER = ../tools/kflash.py
+# default
+MAKEFILES := 
+# environment
+QUARTUS_ROOTDIR = D:\intelFPGA_lite\18.1\quartus
+# automatic
+<F = $(notdir $<)
+# environment
+VS160COMCOMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\
+# makefile (from 'Makefile', line 4)
+KERNEL_ELF := target/riscv64gc-unknown-none-elf/release/os
+# makefile (from 'Makefile', line 9)
+APPS := ../user/src/bin/*
+# environment
+LC_ALL = C
+# environment
+LUA_PATH = ;;C:\Program Files (x86)\Lua\5.1\lua\?.luac
+# makefile (from 'Makefile', line 6)
+DISASM_TMP := target/riscv64gc-unknown-none-elf/release/asm
+# makefile (from 'Makefile', line 14)
+BOOTLOADER := ../bootloader/rustsbi-qemu.bin
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 30)
+OBJCOPY := rust-objcopy --binary-architecture=riscv64
+# default
+SUFFIXES := 
+# environment
+SYSTEMDRIVE = C:
+# environment
+SESSIONNAME = Console
+# environment
+PROCESSOR_REVISION = 9e0a
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+VSCODE_PID = 22824
+# environment
+USERDOMAIN_ROAMINGPROFILE = DESKTOP-24TD2NV
+# variable set hash-table stats:
+# Load=123/1024=12%, Rehash=0, Collisions=23/162=14%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (key c:/Users/14861/Desktop/rCore-irq-test/os, mtime 1652354431ll): 12 files, no impossibilities.
+# ../user/src/bin (key c:/Users/14861/Desktop/rCore-irq-test/user/src/bin, mtime 1651063846ll): 34 files, no impossibilities.
+
+# 46 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+../user/src/bin/initproc.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run-inner: build
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 86):
+	@qemu-system-riscv64 \
+		-machine virt \
+		-nographic \
+		-bios $(BOOTLOADER) \
+		-device loader,file=$(KERNEL_BIN),addr=$(KERNEL_ENTRY_PA) \
+		-drive file=$(FS_IMG),if=none,format=raw,id=x0 \
+        -device virtio-blk-device,drive=x0
+
+fs-img: ../user/src/bin/race_adder_mutex_spin.rs ../user/src/bin/huge_write.rs ../user/src/bin/run_pipe_test.rs ../user/src/bin/race_adder_mutex_blocking.rs ../user/src/bin/cat.rs ../user/src/bin/threads.rs ../user/src/bin/mpsc_sem.rs ../user/src/bin/gui.rs ../user/src/bin/usertests.rs ../user/src/bin/race_adder_loop.rs ../user/src/bin/user_shell.rs ../user/src/bin/sleep_simple.rs ../user/src/bin/pipe_large_test.rs ../user/src/bin/race_adder.rs ../user/src/bin/hello_world.rs ../user/src/bin/fantastic_text.rs ../user/src/bin/sleep.rs ../user/src/bin/cmdline_args.rs ../user/src/bin/filetest_simple.rs ../user/src/bin/exit.rs ../user/src/bin/pipetest.rs ../user/src/bin/forktest2.rs ../user/src/bin/phil_din_mutex.rs ../user/src/bin/yield.rs ../user/src/bin/forktree.rs ../user/src/bin/threads_arg.rs ../user/src/bin/forktest_simple.rs ../user/src/bin/stack_overflow.rs ../user/src/bin/matrix.rs ../user/src/bin/initproc.rs ../user/src/bin/race_adder_atomic.rs ../user/src/bin/forktest.rs
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@cd ../user && make build
+	@rm $(FS_IMG) -f
+	@cd ../easy-fs-fuse && cargo run --release -- -s ../user/src/bin/ -t ../user/target/riscv64gc-unknown-none-elf/release/
+
+sdcard: fs-img
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 51):
+	@echo "Are you sure write to $(SDCARD) ? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@sudo dd if=/dev/zero of=$(SDCARD) bs=1048576 count=32
+	@sudo dd if=$(FS_IMG) of=$(SDCARD)
+
+../user/src/bin/gui.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/race_adder_mutex_blocking.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/phil_din_mutex.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+.PHONY: build env kernel clean disasm disasm-vim run-inner switch-check fs-img
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/fantastic_text.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/forktest2.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/sleep_simple.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/filetest_simple.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-29 20:32:28
+#  File has been updated.
+#  Successfully updated.
+
+kernel:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 66):
+	@echo Platform: $(BOARD)
+	@cp src/linker-$(BOARD).ld src/linker.ld
+	@cargo build --release --features "board_$(BOARD)"
+	@rm src/linker.ld
+
+debug: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 104):
+	@tmux new-session -d \
+		"qemu-system-riscv64 -machine virt -nographic -bios $(BOOTLOADER) -device loader,file=$(KERNEL_BIN),addr=$(KERNEL_ENTRY_PA) -s -S" && \
+		tmux split-window -h "riscv64-unknown-elf-gdb -ex 'file $(KERNEL_ELF)' -ex 'set arch riscv:rv64' -ex 'target remote localhost:1234'" && \
+		tmux -2 attach-session -d
+
+build: env switch-check target/riscv64gc-unknown-none-elf/release/os.bin
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+../user/src/bin/yield.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+switch-check:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 39):
+	(which last-qemu) || (rm last-k210 -f && touch last-qemu && make clean)
+
+../user/src/bin/forktest_simple.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/hello_world.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/sleep.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/race_adder_mutex_spin.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/threads_arg.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/race_adder.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/race_adder_atomic.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/cat.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/user_shell.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/cmdline_args.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/run_pipe_test.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/stack_overflow.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/threads.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/forktree.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/mpsc_sem.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run: run-inner
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/race_adder_loop.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 72):
+	@cargo clean
+
+../user/src/bin/forktest.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/usertests.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+disasm-vim: kernel
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 78):
+	@$(OBJDUMP) $(DISASM) $(KERNEL_ELF) > $(DISASM_TMP)
+	@vim $(DISASM_TMP)
+	@rm $(DISASM_TMP)
+
+../user/src/bin/exit.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/pipe_large_test.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/matrix.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/pipetest.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+../user/src/bin/huge_write.rs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+disasm: kernel
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 75):
+	@$(OBJDUMP) $(DISASM) $(KERNEL_ELF) | less
+
+target/riscv64gc-unknown-none-elf/release/os.bin: kernel
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 56):
+	@$(OBJCOPY) $(KERNEL_ELF) --strip-all -O binary $@
+
+env:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 45):
+	(rustup target list | grep "riscv64gc-unknown-none-elf (installed)") || rustup target add $(TARGET)
+	cargo install cargo-binutils --vers =0.3.3
+	rustup component add rust-src
+	rustup component add llvm-tools-preview
+
+# files hash-table stats:
+# Load=50/1024=5%, Rehash=0, Collisions=3/149=2%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 94 / storage = 1730 B / avg = 18 B
+# current buf: size = 8162 B / used = 1730 B / count = 94 / avg = 18 B
+
+# strcache performance: lookups = 196 / hit rate = 52%
+# hash-table stats:
+# Load=94/8192=1%, Rehash=0, Collisions=2/196=1%
+# Finished Make data base on Thu May 26 13:00:32 2022
+
+ 

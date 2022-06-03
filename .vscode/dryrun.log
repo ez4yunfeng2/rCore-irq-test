@@ -1,0 +1,5 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: Entering directory 'c:/Users/14861/Desktop/rCore-irq-test'
+docker run --rm -it --mount type=bind,source=/cygdrive/c/Users/14861/Desktop/rCore-irq-test,destination=/mnt dinghao188/rcore-tutorial
+make.exe: Leaving directory 'c:/Users/14861/Desktop/rCore-irq-test'
+ 

@@ -128,3 +128,7 @@ pub fn sys_semaphore_up(sem_id: usize) -> isize {
 pub fn sys_semaphore_down(sem_id: usize) -> isize {
     syscall(SYSCALL_SEMAPHORE_DOWN, [sem_id, 0, 0])
 }
+
+pub fn sys_create_desktop() -> isize {
+    syscall(2000, [0, 0, 0])
+}

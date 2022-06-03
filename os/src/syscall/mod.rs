@@ -21,20 +21,22 @@ const SYSCALL_MUTEX_UNLOCK: usize = 1012;
 const SYSCALL_SEMAPHORE_CREATE: usize = 1020;
 const SYSCALL_SEMAPHORE_UP: usize = 1021;
 const SYSCALL_SEMAPHORE_DOWN: usize = 1022;
-
+const SYSCALL_CREATE_DESKTOP: usize = 2000;
 mod fs;
+mod gui;
 mod process;
-mod thread;
 mod sync;
-
+mod thread;
 use fs::*;
 use process::*;
-use thread::*;
 use sync::*;
+use thread::*;
+pub use gui::PAD;
+use self::gui::create_desktop;
 
 pub fn syscall(syscall_id: usize, args: [usize; 3]) -> isize {
     match syscall_id {
-        SYSCALL_DUP=> sys_dup(args[0]),
+        SYSCALL_DUP => sys_dup(args[0]),
         SYSCALL_OPEN => sys_open(args[0] as *const u8, args[1] as u32),
         SYSCALL_CLOSE => sys_close(args[0]),
         SYSCALL_PIPE => sys_pipe(args[0] as *mut usize),
@@ -57,7 +59,7 @@ pub fn syscall(syscall_id: usize, args: [usize; 3]) -> isize {
         SYSCALL_SEMAPHORE_CREATE => sys_semaphore_creare(args[0]),
         SYSCALL_SEMAPHORE_UP => sys_semaphore_up(args[0]),
         SYSCALL_SEMAPHORE_DOWN => sys_semaphore_down(args[0]),
+        SYSCALL_CREATE_DESKTOP => create_desktop(),
         _ => panic!("Unsupported syscall_id: {}", syscall_id),
     }
 }
-

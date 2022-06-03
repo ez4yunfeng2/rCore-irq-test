@@ -1,6 +1,5 @@
 use super::BlockDevice;
 use crate::drivers::{complete, IRQ_TASKS};
-
 use crate::sync::UPSafeCell;
 use crate::task::awake_by_irq_and_run;
 use crate::{
@@ -30,11 +29,12 @@ impl BlockDevice for VirtIOBlock {
             .read_block_irq(block_id, buf, &|| wait_irq_and_run_next(8))
             .expect("Error when reading VirtIOBlk");
     }
+
     fn write_block(&self, block_id: usize, buf: &[u8]) {
         self.0
-        .exclusive_access()
-        .write_block_irq(block_id, buf, &|| wait_irq_and_run_next(8))
-        .expect("Error when writing VirtIOBlk");
+            .exclusive_access()
+            .write_block_irq(block_id, buf, &|| wait_irq_and_run_next(8))
+            .expect("Error when writing VirtIOBlk");
     }
 
     fn handler_interrupt(&self) {

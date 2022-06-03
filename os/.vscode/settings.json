@@ -1,0 +1,6 @@
+{
+    "rust.target": "riscv64gc-unknown-none-elf",
+    "rust.all_targets": false,
+    "rust-analyzer.cargo.target": "riscv64gc-unknown-none-elf",
+    "rust-analyzer.checkOnSave.allTargets": false
+}

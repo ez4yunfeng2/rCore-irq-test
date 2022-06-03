@@ -7,8 +7,9 @@ mod switch;
 mod task;
 
 use crate::{
+    drivers::{IRQ_TASKS, UART_DEVICE},
     fs::{open_file, OpenFlags},
-    sync::UPSafeCell, drivers::{IRQ_TASKS, UART_DEVICE},
+    sync::UPSafeCell,
 };
 use alloc::sync::Arc;
 use lazy_static::*;
@@ -34,7 +35,7 @@ pub fn awake_by_irq_and_run(irq: usize) {
     let task_cx_ptr = &mut task_inner.task_cx as *mut TaskContext;
     drop(task_inner);
     add_task(task);
-    if let Some(task) = IRQ_TASKS.fetch_irq_task(irq){
+    if let Some(task) = IRQ_TASKS.fetch_irq_task(irq) {
         add_task_front(task);
     } else {
         if irq == 10 {
@@ -44,9 +45,9 @@ pub fn awake_by_irq_and_run(irq: usize) {
     schedule(task_cx_ptr);
 }
 
-lazy_static!(
-    pub static ref IRQ_FLAG:UPSafeCell<bool> = unsafe{UPSafeCell::new(false)};
-);
+lazy_static! {
+    pub static ref IRQ_FLAG: UPSafeCell<bool> = unsafe { UPSafeCell::new(false) };
+}
 
 pub fn wait_irq_and_run_next(irq: usize) {
     if let Some(task) = take_current_task() {
@@ -57,10 +58,10 @@ pub fn wait_irq_and_run_next(irq: usize) {
         IRQ_TASKS.add_irq_task(irq, task);
         schedule(task_cx_ptr);
     } else {
-        loop{
-            if *IRQ_FLAG.exclusive_access() == true{
+        loop {
+            if *IRQ_FLAG.exclusive_access() == true {
                 *IRQ_FLAG.exclusive_access() = false;
-                break
+                break;
             }
         }
     }

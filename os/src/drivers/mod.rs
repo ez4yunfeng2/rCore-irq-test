@@ -1,7 +1,10 @@
 mod block;
-mod uart;
+mod gpu;
 mod plic;
-
+mod uart;
+mod input;
 pub use block::BLOCK_DEVICE;
-pub use uart::UART_DEVICE;
+pub use gpu::*;
 pub use plic::*;
+pub use uart::UART_DEVICE;
+pub use input::*;

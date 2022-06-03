@@ -3,7 +3,7 @@
 
 #[macro_use]
 extern crate user_lib;
-use user_lib::{fork, yield_, waitpid, exit, wait};
+use user_lib::{fork, yield_, waitpid, exit, wait, create_desktop};
 
 const MAGIC: i32 = -0x10384;
 
@@ -24,6 +24,7 @@ pub fn main() -> i32 {
     assert!(waitpid(pid as usize, &mut xstate) < 0 && wait(&mut xstate) <= 0);
     println!("waitpid {} ok.", pid);
     println!("exit pass.");
+    create_desktop();
     0
 }
 

@@ -129,3 +129,6 @@ pub fn semaphore_down(sem_id: usize) {
     sys_semaphore_down(sem_id);
 }
 
+pub fn create_desktop() {
+    sys_create_desktop();
+}

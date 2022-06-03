@@ -1,4 +1,4 @@
-use core::cell::{RefCell, RefMut};
+use core::cell::{RefCell, RefMut, BorrowMutError};
 
 /// Wrap a static data structure inside it so that we are
 /// able to access it without any `unsafe`.
@@ -18,10 +18,16 @@ impl<T> UPSafeCell<T> {
     /// User is responsible to guarantee that inner struct is only used in
     /// uniprocessor.
     pub unsafe fn new(value: T) -> Self {
-        Self { inner: RefCell::new(value) }
+        Self {
+            inner: RefCell::new(value),
+        }
     }
     /// Panic if the data has been borrowed.
     pub fn exclusive_access(&self) -> RefMut<'_, T> {
         self.inner.borrow_mut()
+    }
+
+    pub fn try_exclusive_access(&self) -> Result<RefMut<'_, T>, BorrowMutError> {
+        self.inner.try_borrow_mut()
     }
 }

@@ -7,9 +7,9 @@ use core::{
 use alloc::collections::VecDeque;
 
 use crate::{
-    drivers::{IRQ_TASKS, complete},
+    drivers::{complete, IRQ_TASKS},
     sync::UPSafeCell,
-    task::{awake_by_irq_and_run, wait_irq_and_run_next}
+    task::{awake_by_irq_and_run, wait_irq_and_run_next},
 };
 
 pub trait UartDevice: Send + Sync + Any {
