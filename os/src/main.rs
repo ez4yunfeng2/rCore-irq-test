@@ -6,7 +6,7 @@
 #![feature(asm)]
 #![feature(panic_info_message)]
 #![feature(alloc_error_handler)]
-
+use core::arch::global_asm;
 use crate::drivers::{GPU_DEVICE, KEYBOARD_DEVICE, MOUSE_DEVICE};
 
 extern crate alloc;

@@ -9,6 +9,7 @@ use alloc::sync::Arc;
 use alloc::vec::Vec;
 use lazy_static::*;
 use riscv::register::satp;
+use core::arch::asm;
 
 extern "C" {
     fn stext();
