@@ -3,6 +3,8 @@ use crate::task::current_kstack_top;
 use core::fmt::{Write, Arguments};
 use core::panic::PanicInfo;
 use core::sync::atomic::{AtomicBool, Ordering};
+use core::arch::asm;
+
 struct Stderr;
 
 impl Write for Stderr {

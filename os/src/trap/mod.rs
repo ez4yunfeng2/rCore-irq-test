@@ -1,6 +1,8 @@
 mod context;
 
 pub use context::TrapContext;
+use core::arch::global_asm;
+use core::arch::asm;
 use crate::config::TRAMPOLINE;
 use crate::drivers::{KEYBOARD_DEVICE, MOUSE_DEVICE};
 use crate::task::{
